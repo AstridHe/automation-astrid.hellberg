@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 
+
 const title='Bills'
 const actionBtn=':nth-child(1) > .action'
 const edit='.menu > :nth-child(1)'
@@ -13,6 +14,7 @@ function goBack(cy, confirmContent){
 }
 
 function editBill(cy, confirmContent){
+    
     cy.contains(title)
     cy.get(actionBtn).click()
     cy.get(edit).click()

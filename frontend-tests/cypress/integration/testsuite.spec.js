@@ -17,7 +17,7 @@ import faker from 'faker'
 //Test suite
 describe('Regression test suite', function(){
     beforeEach( ()=>{
-        cy.visit('http://localhost:3000')
+        cy.visit(targets.baseURL)
         loginFuncs.performValidLogin(cy, targets.username,  targets.password, targets.firstConfContent)
     })
     afterEach( ()=>{
@@ -34,13 +34,13 @@ describe('Regression test suite', function(){
     it('Click through pages', function(){
         
         //loginFuncs.performValidLogin(cy, targets.username,  targets.password, targets.firstConfContent)
-        dashboardFuncs.checkRoomsBtn(cy, 'Rooms')
+        dashboardFuncs.checkRoomsBtn(cy, targets.label1)
         roomsFuncs.goBack(cy, targets.firstConfContent)
-        dashboardFuncs.checkClientsBtn(cy, 'Clients')
+        dashboardFuncs.checkClientsBtn(cy, targets.label3)
         clientsFuncs.goBack(cy, targets.firstConfContent)
-        dashboardFuncs.checkBillsBtn(cy, 'Bills')
+        dashboardFuncs.checkBillsBtn(cy, targets.label6)
         billsFuncs.goBack(cy, targets.firstConfContent)
-        dashboardFuncs.checkReservationsBtn(cy, 'Reservations')
+        dashboardFuncs.checkReservationsBtn(cy, targets.label7)
         reservFuncs.goBack(cy, targets.firstConfContent)
        // dashboardFuncs.logout(cy, targets.secondConfContent)
 
@@ -50,7 +50,7 @@ describe('Regression test suite', function(){
         //loginFuncs.performValidLogin(cy, targets.username,  targets.password, targets.firstConfContent)
         dashboardFuncs.checkRoomsBtn(cy, targets.label1)
         roomsFuncs.createRoom(cy, targets.label2)
-        newRoomFunc.createNewRoom(cy, faker.random.number, faker.random.number, faker.random.number, targets.label1)
+        newRoomFunc.createNewRoom(cy, faker.random.number(1100), faker.random.number(10), faker.random.number(), targets.label1)
         roomsFuncs.goBack(cy, targets.firstConfContent)
         //dashboardFuncs.logout(cy, targets.secondConfContent)
     })
@@ -59,7 +59,7 @@ describe('Regression test suite', function(){
         //loginFuncs.performValidLogin(cy, targets.username,  targets.password, targets.firstConfContent)
         dashboardFuncs.checkClientsBtn(cy, targets.label3)
         clientsFuncs.createClient(cy, targets.label4)
-        newClientFunc.createNewClient(cy, faker.name.findName, faker.internet.email, faker.phone.phoneNumber, targets.label3)
+        newClientFunc.createNewClient(cy, faker.name.findName(), faker.internet.email(), faker.phone.phoneNumber(), targets.label3)
         clientsFuncs.goBack(cy, targets.firstConfContent)
         //dashboardFuncs.logout(cy, targets.secondConfContent)
     
@@ -73,7 +73,7 @@ describe('Regression test suite', function(){
         //dashboardFuncs.logout(cy, targets.secondConfContent)
     })
 
-    it('Change bill to paid', function(){
+    it('Change status of bill', function(){
         dashboardFuncs.checkBillsBtn(cy, targets.label6)
         billsFuncs.editBill(cy, targets.label5)
         editBillsFunc.payBill(cy, targets.label6)
@@ -81,9 +81,10 @@ describe('Regression test suite', function(){
     })
 
     it('Create reservation', function(){
+
         dashboardFuncs.checkReservationsBtn(cy, targets.label7)
-        reservFuncs.createRes(cy, 'New Reservation')
-        newResFunc.createNewRes(cy, '2020-12-20', '2020-12-25', 'Reservations')
+        reservFuncs.createRes(cy, targets.label8)
+        newResFunc.createNewRes(cy, faker.date.recent().toISOString(), faker.date.soon().toISOString(), targets.label7)
         reservFuncs.goBack(cy, targets.firstConfContent)
 
     })

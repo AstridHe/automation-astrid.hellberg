@@ -12,5 +12,6 @@ module.exports={
     label4:'New Client',
     label5:'Bill:',
     label6:'Bills',
-    label7:'Reservations'
+    label7:'Reservations',
+    label8:'New Reservation'
 }
