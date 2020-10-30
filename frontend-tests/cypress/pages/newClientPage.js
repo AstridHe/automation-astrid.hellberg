@@ -4,10 +4,10 @@ const emailInput=':nth-child(2) > input'
 const phoneInput=':nth-child(3) > input'
 const saveBtn='.blue'
 
-function createNewClient(cy, confirmContent){
-    cy.get(nameInput).type('Astrid')
-    cy.get(emailInput).type('astrid@mail.com')
-    cy.get(phoneInput).type('123456')
+function createNewClient(cy, name, email, phone, confirmContent){
+    cy.get(nameInput).type(name)
+    cy.get(emailInput).type(email)
+    cy.get(phoneInput).type(phone)
     cy.get(saveBtn).click()
     cy.contains(confirmContent)
 }
